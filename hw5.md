@@ -1,18 +1,17 @@
----
-title: "p8105_hw5_jih2119"
-output: github_document
----
+p8105\_hw5\_jih2119
+================
 
-###Setup
+### Setup
 
-```{r setup, message = FALSE}
+``` r
 library(tidyverse)
 library(rvest)
 ```
 
-##Problem 1
+Problem 1
+---------
 
-```{r read_data, message = FALSE}
+``` r
 id = list.files("./data") 
 
 file_base = "./data/"
@@ -34,6 +33,4 @@ results_df = tibble(
   mutate(arm = str_replace(arm, "exp", "Experimental")) %>% 
   mutate(id = str_replace(id, ".csv", "")) %>% 
   unnest()
-
 ```
-
