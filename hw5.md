@@ -32,5 +32,6 @@ results_df = tibble(
   mutate(arm = str_replace(arm, "con", "Control")) %>% 
   mutate(arm = str_replace(arm, "exp", "Experimental")) %>% 
   mutate(id = str_replace(id, ".csv", "")) %>% 
-  unnest()
+  unnest() %>% 
+  gather(key = week, value = results, week_1:week_8)
 ```
