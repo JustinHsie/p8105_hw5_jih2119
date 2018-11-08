@@ -54,7 +54,26 @@ ggplot(
 
 From the data and subsequent plot it looks like the experimental arm overall had an increase in observation values over time compared to the control group. 
 
+##Problem 2
 
+The dataset contains variables describing the victim's first and last name, race, age, and sex. It also contains when the crime was reported, which city and state, and disposition of the case.
+
+```{r clean data}
+homicide = read_csv("homicide-data.csv") %>% 
+  unite(city_state, city:state, sep = ", ")
+```
+
+```{r total_homicide}
+total_hom = group_by(homicide, city_state) %>% 
+  summarize(n_hom = n())
+```
+
+```{r unsolved_homicide}
+unsolved_hom = 
+  filter(homicide, !str_detect(disposition, "by")) %>% 
+  group_by(city_state) %>% 
+  summarize(n_unsolved = n())
+```
 
 
 
