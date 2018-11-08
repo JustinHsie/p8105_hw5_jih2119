@@ -36,8 +36,14 @@ results_df = tibble(
 ```
 
 ``` r
-ggplot(results_df, aes(x = week, y = results, group = id)) +
-  geom_line()
+ggplot(results_df, aes(x = week, y = results, group = id, color = id)) +
+  geom_line() +
+  labs(
+    title = "Scatterplot",
+    x = "Week",
+    y = "Observations"
+  ) +
+  theme_bw()
 ```
 
 ![](hw5_files/figure-markdown_github/long_plot-1.png)
