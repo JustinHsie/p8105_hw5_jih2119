@@ -63,18 +63,23 @@ homicide = read_csv("homicide-data.csv") %>%
   unite(city_state, city:state, sep = ", ")
 ```
 
-```{r total_homicide}
-total_hom = group_by(homicide, city_state) %>% 
-  summarize(n_hom = n())
+```{r sum_homicide, message = FALSE}
+sum_hom = homicide %>% 
+  group_by(city_state, disposition) %>%
+  summarize(n_hom = n()) %>% 
+  spread(key = disposition, value = n_hom)
+sum_hom[is.na(sum_hom)] = 0
+sum_hom = janitor::clean_names(sum_hom) %>% 
+  mutate(unsolved = closed_without_arrest + open_no_arrest) %>% 
+  mutate(total = 
+           closed_by_arrest + closed_without_arrest + open_no_arrest)
+
 ```
 
-```{r unsolved_homicide}
-unsolved_hom = 
-  filter(homicide, !str_detect(disposition, "by")) %>% 
-  group_by(city_state) %>% 
-  summarize(n_unsolved = n())
-```
 
+```{r prop}
+#prop = prop.test(unsolved_hom, total_hom)
+```
 
 
 
