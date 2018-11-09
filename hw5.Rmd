@@ -73,12 +73,14 @@ sum_hom = janitor::clean_names(sum_hom) %>%
   mutate(unsolved = closed_without_arrest + open_no_arrest) %>% 
   mutate(total = 
            closed_by_arrest + closed_without_arrest + open_no_arrest)
-
 ```
 
 
-```{r prop}
-#prop = prop.test(unsolved_hom, total_hom)
+```{r prop_balt}
+balt = sum_hom %>% 
+  filter(city_state == "Baltimore, MD")
+prop_balt = prop.test(balt$unsolved, balt$total) %>% 
+broom::tidy()
 ```
 
 
